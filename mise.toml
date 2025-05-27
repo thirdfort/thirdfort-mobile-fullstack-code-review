@@ -1,0 +1,7 @@
+[tools]
+buf = "1.54.0"
+go = "1.24.3"
+node = "22.16.0"
+protoc = "31.0"
+protoc-gen-connect-go = "latest"
+protoc-gen-go = "1.36.6"

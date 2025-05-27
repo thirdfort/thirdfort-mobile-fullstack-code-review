@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package thirdfort.consumer.v1;
+
+import "google/protobuf/any.proto";
+import "thirdfort/consumer/v1/resources.proto";
+
+service ConsumerService {
+  // Returns the requested [TaskStep][thirdfort.consumer.v1alpha1.TaskStep].
+  rpc GetTaskStep(GetTaskStepRequest) returns (TaskStep) {}
+
+  // Completes the specified [TaskStep][thirdfort.consumer.v1alpha1.TaskStep] by providing the required data.
+  rpc CompleteTaskStep(CompleteTaskStepRequest) returns (CompleteTaskStepResponse) {}
+}
+
+message GetTaskStepRequest {
+  string name = 1;
+}
+
+message CompleteTaskStepRequest {
+  string name = 1;
+  google.protobuf.Any data = 2;
+}
+
+message CompleteTaskStepResponse {
+  string name = 1;
+  TaskStep next_step = 2;
+}

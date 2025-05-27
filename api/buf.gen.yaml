@@ -1,0 +1,22 @@
+version: v2
+clean: true
+managed:
+  enabled: true
+  override:
+  - file_option: go_package_prefix
+    path: thirdfort
+    value: github.com/thirdfort/thirdfort-mobile-fullstack-code-review/server/libs/genproto
+plugins:
+  - remote: buf.build/protocolbuffers/go:v1.36.2
+    out: ../server/libs/genproto
+    opt: paths=source_relative
+  - remote: buf.build/connectrpc/go:v1.18.1
+    out: ../server/libs/genproto
+    opt: paths=source_relative
+  - remote: buf.build/bufbuild/es:v2.2.3
+    out: ../mobile/libs/genproto
+    opt: target=ts
+    include_imports: true
+  - remote: buf.build/connectrpc/es:v1.6.1
+    out: ../mobile/libs/genproto
+    opt: target=ts

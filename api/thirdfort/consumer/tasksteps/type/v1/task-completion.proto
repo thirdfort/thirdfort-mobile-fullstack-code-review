@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package thirdfort.consumer.tasksteps.type.v1;
+
+import "thirdfort/consumer/v1/resources.proto";
+
+message TaskCompletionTaskStepParams {
+  // The display name of the task.
+  string display_name = 1;
+
+  // The description of the task.
+  string primary_description = 2;
+
+  // The text to display on the submit button.
+  string submit_button_text = 3;
+}
+
+message TaskCompletionTaskStepData {}

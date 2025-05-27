@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package thirdfort.consumer.tasksteps.type.v1;
+
+import "thirdfort/consumer/v1/resources.proto";
+
+message TaskDescriptionTaskStepParams {
+  // The display name of the task.
+  string display_name = 1;
+
+  // The description of the task.
+  string primary_description = 2;
+
+  // The secondary description of the task.
+  string secondary_description = 3;
+
+  // A list of things the user must know/gather in order to complete this task.
+  repeated string requirements = 4;
+
+  // Indicates if this task is skipable.
+  bool skipable = 5;
+}
+
+message TaskDescriptionTaskStepData {
+  // Indicates whether the task was skipped.
+  bool skipped = 1;
+}

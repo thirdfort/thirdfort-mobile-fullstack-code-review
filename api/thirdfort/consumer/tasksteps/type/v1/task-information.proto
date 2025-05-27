@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package thirdfort.consumer.tasksteps.type.v1;
+
+import "thirdfort/consumer/v1/resources.proto";
+
+// This task step is used to display information to the user.
+message TaskInformationTaskStepParams {
+  // The display name of the task.
+  string display_name = 1;
+
+  // The description of the task.
+  string primary_description = 2;
+
+  // The secondary description of the task.
+  string secondary_description = 3;
+
+  // The text to display on the button used to continue to the next task.
+  string button_text = 4;
+}
+
+message TaskInformationTaskStepData {}
