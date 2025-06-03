@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
-import { ConsumerServiceClientContext } from '../contexts/consumerServiceContext'
+import { ConsumerServiceClientContext } from '../contexts/ConsumerServiceContext'
 import { useContext, useEffect, useState } from 'react';
 import { TaskStep } from '../../libs/genproto/thirdfort/consumer/v1/resources_pb';
 import { TaskStepRenderer } from '../components/TaskStepRenderer';
 import { useNavigation } from '@react-navigation/native';
 import { anyPack } from '@bufbuild/protobuf/wkt';
 import { DescMessage, MessageShape } from '@bufbuild/protobuf';
-import { UserContext } from '../contexts/userContext';
+import { UserContext } from '../contexts/UserContext';
 
 export type TaskStepScreenProps = {
 };
