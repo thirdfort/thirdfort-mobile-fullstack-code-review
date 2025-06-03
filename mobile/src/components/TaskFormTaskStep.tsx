@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
 
-import { FormTaskStepParams, TextField, FormTaskStepParams_FormField} from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/form_pb';
+import { FormTaskStepParams, FormTaskStepParams_FormField} from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/form_pb';
 
 import { spacing, typography, scheme } from '../styles/values';
 
