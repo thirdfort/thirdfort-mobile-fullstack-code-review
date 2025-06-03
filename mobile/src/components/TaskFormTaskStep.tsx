@@ -1,36 +1,14 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Button } from '@react-navigation/elements';
 
-import { FormTaskStepParams, FormTaskStepParams_FormField} from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/form_pb';
+import { FormTaskStepParams} from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/form_pb';
 
 import { spacing, typography, scheme } from '../styles/values';
+import { FormField } from './FormField';
 
 type TaskCompletionTaskStepProps = {
   params: FormTaskStepParams;
   onTaskStepComplete: () => void;
-};
-
-type FormFieldProps = {
-  params: FormTaskStepParams_FormField
-}
-
-export function FormField({params}: FormFieldProps) {
-
-  if (!params.fieldType || !params.fieldType.case) return null;
-
-  switch (params.fieldType.case) {
-    case 'textField':
-      return (
-        <View>
-          <Text style={[styles.containerText, styles.description]}>
-            {params.displayName}
-          </Text>
-          <TextInput placeholder={params.description}/>
-        </View>
-      );
-    default:
-      return null;
-  }
 };
 
 export function TaskFormTaskStep({ params, onTaskStepComplete } : TaskCompletionTaskStepProps) {
@@ -45,7 +23,7 @@ export function TaskFormTaskStep({ params, onTaskStepComplete } : TaskCompletion
             {params.description}
           </Text>
         </View>
-        <View>
+        <View style={styles.container}>
           {params.fields.map((item) => (
             <FormField
               params={item}
@@ -65,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: scheme.background1,
+    gap: 1
   },
   content: {
     flex: 1,
@@ -72,6 +51,10 @@ const styles = StyleSheet.create({
     gap: spacing.lg,
     padding: spacing.lg,
     justifyContent: 'space-between',
+  },
+  input: {
+    height: 120,
+    width: '100%',
   },
   icon: {
     marginTop: 10,
