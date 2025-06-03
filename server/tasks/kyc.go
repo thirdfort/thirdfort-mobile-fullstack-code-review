@@ -61,6 +61,18 @@ func getTaskFormNameParams() (*tasksv1.FormTaskStepParams, error) {
 				},
 			},
 			{
+				Name:        "middle_names",
+				DisplayName: "Middle name",
+				Description: "Your legal middle name(s)",
+				FieldType: &tasksv1.FormTaskStepParams_FormField_TextField{
+					TextField: &tasksv1.TextField{
+						Required:    false,
+						Placeholder: "Middle name",
+						MaxLength:   32,
+					},
+				},
+			},
+			{
 				Name:        "family_name",
 				DisplayName: "Last name",
 				Description: "Your legal last, family, or surname",
