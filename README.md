@@ -34,7 +34,7 @@ go mod tidy
 
 You can then start the server using...
 ```sh
-go server/main.go
+go run server/main.go
 ```
 
 ## Mobile
