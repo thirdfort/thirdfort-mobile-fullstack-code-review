@@ -26,6 +26,7 @@ export function TaskFormTaskStep({ params, onTaskStepComplete } : TaskCompletion
         <View style={styles.container}>
           {params.fields.map((item) => (
             <FormField
+              key={item.name}
               params={item}
             />
           ))}
