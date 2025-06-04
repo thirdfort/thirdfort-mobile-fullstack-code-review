@@ -18,7 +18,7 @@ export function FormField({params}: FormFieldProps) {
   switch (params.fieldType.case) {
     case 'textField':
       return (
-        <View style={styles.inputs}>
+        <View style={styles.container}>
           <Text style={styles.label}>
             {params.displayName}
           </Text>
@@ -39,11 +39,6 @@ export function FormField({params}: FormFieldProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: Platform.OS === 'ios' ? 66 : 56,
-    display: 'flex',
-    flex: 1,
-  },
-  inputs: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
@@ -63,7 +58,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   input: {
-    height: 60,
+    height: 70,
     borderColor: '#ccc',
     backgroundColor: '#fff',
     borderWidth: 1,
