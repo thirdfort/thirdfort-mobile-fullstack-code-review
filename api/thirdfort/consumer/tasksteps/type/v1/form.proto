@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package thirdfort.consumer.tasksteps.type.v1;
+
+message FormTaskStepParams {
+  // The display name of the form.
+  string display_name = 1;
+
+  // Markdown formatted description providing more context for the form.
+  string description = 2;
+
+  // Defines a specific field in the form.
+  message FormField {
+    // Machine-readable name of the field.
+    string name = 1;
+
+    // Human-readable display name of the field.
+    string display_name = 2;
+
+    // Human-readable description of the field.
+    string description = 3;
+
+    // The type of the field.
+    oneof field_type {
+      TextField text_field = 4;
+    }
+  }
+  // The fields to display in the form.
+  repeated FormField fields = 3;
+
+  // The text to display on the submit button.
+  string submit_button_text = 4;
+}
+
+// The field is a text input.
+message TextField {
+  // The placeholder text to display in the text input.
+  string placeholder = 1;
+
+  // The maximum length of the text input.
+  int32 max_length = 2;
+
+  // Flag to determine whether the text input is required.
+  bool required = 3;
+}
+
+
+// The data submitted by the user in response to a form.
+message FormTaskStepData {
+  // Defines a specific field in the form.
+  repeated FormFieldData fields = 1;
+
+  message FormFieldData {
+    // Name of the field.
+    string name = 1;
+    
+    // The value of the field.
+     string value = 2;
+  }
+}

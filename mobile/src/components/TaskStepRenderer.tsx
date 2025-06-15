@@ -5,6 +5,7 @@ import { taskStepMap } from '../mapping';
 
 import { file_thirdfort_consumer_tasksteps_type_v1_task_description } from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/task-description_pb';
 import { file_thirdfort_consumer_tasksteps_type_v1_task_information } from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/task-information_pb';
+import { file_thirdfort_consumer_tasksteps_type_v1_form } from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/form_pb';
 import { file_thirdfort_consumer_tasksteps_type_v1_task_completion } from '../../libs/genproto/thirdfort/consumer/tasksteps/type/v1/task-completion_pb';
 
 type TaskStepRendererProps = {
@@ -15,6 +16,7 @@ type TaskStepRendererProps = {
 export const registry = createRegistry(
   file_thirdfort_consumer_tasksteps_type_v1_task_description,
   file_thirdfort_consumer_tasksteps_type_v1_task_information,
+  file_thirdfort_consumer_tasksteps_type_v1_form,
   file_thirdfort_consumer_tasksteps_type_v1_task_completion,
 );
 
@@ -23,6 +25,7 @@ export function TaskStepRenderer({taskStep, onTaskStepComplete} : TaskStepRender
   switch(taskStep.name) {
     case "TaskDescription":
     case "TaskInformation":
+    case "TaskForm":
     case "TaskCompletion":
       params = anyUnpack(taskStep.params as any, registry);
       break;

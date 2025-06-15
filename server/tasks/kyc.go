@@ -43,6 +43,52 @@ func getTaskInformationParams() (*tasksv1.TaskInformationTaskStepParams, error) 
 	}, nil
 }
 
+func getTaskFormNameParams() (*tasksv1.FormTaskStepParams, error) {
+	return &tasksv1.FormTaskStepParams{
+		DisplayName: "What's your name?",
+		Description: "Enter your name as it appears on your government-issued ID",
+		Fields: []*tasksv1.FormTaskStepParams_FormField{
+			{
+				Name:        "given_name",
+				DisplayName: "First name",
+				Description: "Your legal first or given name",
+				FieldType: &tasksv1.FormTaskStepParams_FormField_TextField{
+					TextField: &tasksv1.TextField{
+						Required:    true,
+						Placeholder: "First name",
+						MaxLength:   32,
+					},
+				},
+			},
+			{
+				Name:        "middle_names",
+				DisplayName: "Middle name",
+				Description: "Your legal middle name(s)",
+				FieldType: &tasksv1.FormTaskStepParams_FormField_TextField{
+					TextField: &tasksv1.TextField{
+						Required:    false,
+						Placeholder: "Middle name",
+						MaxLength:   32,
+					},
+				},
+			},
+			{
+				Name:        "family_name",
+				DisplayName: "Last name",
+				Description: "Your legal last, family, or surname",
+				FieldType: &tasksv1.FormTaskStepParams_FormField_TextField{
+					TextField: &tasksv1.TextField{
+						Required:    true,
+						Placeholder: "Last name",
+						MaxLength:   32,
+					},
+				},
+			},
+		},
+		SubmitButtonText: "Next",
+	}, nil
+}
+
 func getTaskCompletionParams() (*tasksv1.TaskCompletionTaskStepParams, error) {
 	return &tasksv1.TaskCompletionTaskStepParams{
 		DisplayName:        "Task complete",
@@ -93,6 +139,27 @@ func createTaskInformationTaskStep() (*consumerv1.TaskStep, error) {
 	}, nil
 }
 
+func createTaskNameFormTaskStep() (*consumerv1.TaskStep, error) {
+	params, err := getTaskFormNameParams()
+	if err != nil {
+		return nil, err
+	}
+
+	anyParams, err := anypb.New(params)
+	if err != nil {
+		return nil, err
+	}
+
+	return &consumerv1.TaskStep{
+		Name:       "TaskForm",
+		CreateTime: timestamppb.New(time.Now()),
+		UpdateTime: timestamppb.New(time.Now()),
+		State:      taskStepStateToProto("NOT_COMPLETED"),
+		Type:       "TaskForm",
+		Params:     anyParams,
+	}, nil
+}
+
 func createTaskCompletionTaskStep() (*consumerv1.TaskStep, error) {
 	params, err := getTaskCompletionParams()
 	if err != nil {
@@ -134,6 +201,11 @@ func createKYCCheck(id string) *Check {
 		return nil
 	}
 
+	nameFormStep, err := createTaskNameFormTaskStep()
+	if err != nil {
+		return nil
+	}
+
 	compStep, err := createTaskCompletionTaskStep()
 	if err != nil {
 		return nil
@@ -144,6 +216,7 @@ func createKYCCheck(id string) *Check {
 		TaskSteps: []consumerv1.TaskStep{
 			*descStep,
 			*infoStep,
+			*nameFormStep,
 			*compStep,
 		},
 	}
