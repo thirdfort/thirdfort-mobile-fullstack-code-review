@@ -4,11 +4,11 @@ go 1.23.8
 
 require (
 	connectrpc.com/connect v1.18.1
-	golang.org/x/net v0.35.0
+	golang.org/x/net v0.38.0
 	google.golang.org/protobuf v1.36.6
 )
 
 require (
 	github.com/google/go-cmp v0.6.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 )
